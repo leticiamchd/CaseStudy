@@ -138,5 +138,30 @@ GROUP BY customer_id
 ORDER BY customer_id
 
 # 10 
+**OBS** THIS WAS MADE ON BIGQUERY 
+DOUBTS: THE POINTS START TO COUNT JUST AFTER THEY BECOME MEMBERS ?
+WITH all_data AS
+(
+  SELECT sales.customer_id, order_date, sales.product_id,join_date,
+  product_name, price
+  FROM
+   `resonant-cairn-350019.case_study.sales` as sales 
+   INNER JOIN `resonant-cairn-350019.case_study.menu` as menu
+   ON sales.product_id = menu.product_id
+   INNER JOIN `resonant-cairn-350019.case_study.members` as members
+   ON sales.customer_id = members.customer_id
+)
 
+SELECT 
+	customer_id, 
+    SUM(CASE 
+    	    WHEN DATE_DIFF(order_date, join_date, DAY) <= 7 THEN price * 20
+          WHEN DATE_DIFF(order_date, join_date, DAY) > 7 AND product_name = 'sushi' THEN price * 20
+      	  ELSE price * 10
+  		END) AS points
+
+FROM all_data
+WHERE order_date >= join_date AND order_date < '2021-02-01'
+GROUP BY customer_id
+ORDER BY customer_id
 

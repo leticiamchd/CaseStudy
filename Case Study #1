@@ -1,0 +1,95 @@
+# 1
+
+SELECT customer_id,
+    SUM(price) AS total_amount
+FROM dannys_diner.sales sales
+    INNER JOIN dannys_diner.menu menu
+    ON sales.product_id = menu.product_id
+GROUP BY customer_id
+ORDER BY total_amount DESC
+
+# 2
+
+SELECT customer_id, 
+	COUNT(order_date) AS days_visited
+FROM dannys_diner.sales 
+GROUP BY customer_id
+ORDER BY customer_id
+  
+# 3 
+ SELECT 
+	customer_id, order_date, product_name
+FROM dannys_diner.sales sales
+	INNER JOIN dannys_diner.menu menu
+    ON sales.product_id = menu.product_id
+WHERE order_date = '2021-01-01'
+
+# 4 
+SELECT 
+	-- customer_id,
+    product_name, 
+    COUNT(product_name) AS favorite
+FROM dannys_diner.menu menu
+	INNER JOIN dannys_diner.sales sales
+    ON menu.product_id = sales.product_id
+GROUP BY product_name
+
+# 5 
+
+SELECT 
+	customer_id,
+    product_name, 
+    COUNT(product_name) AS favorite
+FROM dannys_diner.sales sales
+	INNER JOIN dannys_diner.menu menu
+    ON sales.product_id = menu.product_id
+GROUP BY customer_id, product_name
+ORDER BY favorite DESC
+
+# 6 
+
+SELECT 
+	sales.customer_id,
+    product_name, 
+    order_date
+FROM dannys_diner.sales sales
+	INNER JOIN dannys_diner.menu menu
+    ON sales.product_id = menu.product_id
+    INNER JOIN dannys_diner.members members
+    ON members.customer_id = sales.customer_id
+WHERE order_date >= join_date
+ORDER BY order_date
+ 
+ # 7 
+
+ SELECT 
+	sales.customer_id,
+    product_name, 
+    order_date
+FROM dannys_diner.sales sales
+	INNER JOIN dannys_diner.menu menu
+    ON sales.product_id = menu.product_id
+    INNER JOIN dannys_diner.members members
+    ON members.customer_id = sales.customer_id
+WHERE order_date < join_date
+ORDER BY order_date DESC
+
+# 8 
+
+SELECT 
+	sales.customer_id,
+    COUNT(product_name) AS total_items,
+    SUM(price) AS total_amount
+FROM dannys_diner.sales sales
+	INNER JOIN dannys_diner.menu menu
+    ON sales.product_id = menu.product_id
+    INNER JOIN dannys_diner.members members
+    ON members.customer_id = sales.customer_id
+WHERE order_date < join_date
+GROUP BY sales.customer_id
+
+# 9 
+
+
+
+

@@ -191,3 +191,32 @@ WHERE order_date >= join_date AND order_date < '2021-02-01'
 GROUP BY customer_id
 ORDER BY customer_id
 ``` 
+# Bonus Questions 
+
+**11 - Join All the Things**
+
+```sql
+WITH all_data AS
+(
+  SELECT sales.customer_id, order_date, sales.product_id,join_date,
+  product_name, price,
+  FROM
+   `resonant-cairn-350019.case_study.sales` as sales 
+   INNER JOIN `resonant-cairn-350019.case_study.menu` as menu
+   ON sales.product_id = menu.product_id
+   INNER JOIN `resonant-cairn-350019.case_study.members` as members
+   ON sales.customer_id = members.customer_id
+)
+
+SELECT 
+	customer_id,order_date, product_name, price,
+  CASE
+    WHEN customer_id = 'A' AND order_date >= '2021-01-07' THEN 'Y'
+    WHEN customer_id = 'B' AND order_date >= '2021-01-09' THEN 'Y'
+    ELSE 'N'
+    END AS member
+ 
+
+FROM all_data
+ORDER BY customer_id, order_date, product_name
+``` 

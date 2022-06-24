@@ -140,6 +140,8 @@ ORDER BY customer_id
 # 10 
 **OBS** THIS WAS MADE ON BIGQUERY 
 DOUBTS: THE POINTS START TO COUNT JUST AFTER THEY BECOME MEMBERS ?
+
+
 WITH all_data AS
 (
   SELECT sales.customer_id, order_date, sales.product_id,join_date,

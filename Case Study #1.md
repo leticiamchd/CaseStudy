@@ -21,7 +21,9 @@ Danny forneceu a você uma amostra de seus dados gerais de clientes devido a pro
 Danny compartilhou com você 3 conjuntos de dados importantes para este estudo de caso:
 
 > sales 
+> 
 > menu
+> 
 > members
 
 Você pode inspecionar o diagrama da relação entre os conjuntos de dados do exemplo abaixo:

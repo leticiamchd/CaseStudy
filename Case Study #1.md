@@ -1,6 +1,40 @@
-# Problem Solving
+# Resolução do Problema
+
+Neste Notebook terá a resolução do Estudo de Caso número 1, também chamado de Restaurante do Danny. O deasfio original se encontra todo em inglês, porém além de colocar as resoluções, deixarei todas as informações traduzidas.
 
 **Link Original** -> https://8weeksqlchallenge.com/case-study-1/
+
+## Introdução 
+
+Danny adora comida japonesa, então, no início de 2021, ele decidiu embarcar em um empreendimento arriscado e abriu um restaurante bonitinho que vende suas 3 comidas favoritas: sushi, curry e ramen.
+
+O Restaurante do Danny precisa de sua ajuda para amanter o restaurante - o restaurante capturou alguns dados muito básicos de seus poucos meses de operação, mas não tem ideia de como usar seus dados para ajudá-los a administrar o negócio.
+
+## O Problema
+
+Danny quer usar os dados para responder a algumas perguntas simples sobre seus clientes, especialmente sobre seus padrões de visitas, quanto dinheiro eles gastaram e também quais itens do menu são seus favoritos. Ter essa conexão mais profunda com seus clientes o ajudará a oferecer uma experiência melhor e mais personalizada.
+
+Ele planeja usar esses insights para ajudá-lo a decidir se deve expandir o programa de fidelidade do cliente existente - além disso, ele precisa de ajuda para gerar alguns conjuntos de dados básicos para que sua equipe possa inspecionar facilmente os dados sem precisar usar SQL.
+
+Danny forneceu a você uma amostra de seus dados gerais de clientes devido a problemas de privacidade - mas ele espera que esses exemplos sejam suficientes para você escrever queries no SQL totalmente funcionais para ajudá-lo a responder suas perguntas!
+
+Danny compartilhou com você 3 conjuntos de dados importantes para este estudo de caso:
+
+> sales 
+> menu
+> members
+
+Você pode inspecionar o diagrama da relação entre os conjuntos de dados do exemplo abaixo:
+
+IMAGEM 
+
+## Exemplo dos Conjuntos de Dados
+
+Todos os conjuntos de dados existem no banco de dados chamado **dannys_diner** - certifique-se de incluir essa referência em seus scripts SQL ao começar a explorar os dados e responder às perguntas do estudo de caso.
+
+#### Tabela 1: sales 
+
+A tabela de sales captura todas as compras de acordo com o customer_id, com as informações de order_date e product_id correspondentes para quando e quais itens de menu foram pedidos.
 
 # Questions
 

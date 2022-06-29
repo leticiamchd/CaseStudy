@@ -99,9 +99,12 @@ ORDER BY total_amount DESC
 ``` 
 
 **RESPOSTA:**
-customer_ id	total_amount
-A		76		
-B		74
+| customer_id  | total_amount  |
+| ------------ | ------------ |
+|  A | 76  |
+| B  | 74  |
+|  C |  36 |
+
 
 
 #### 2 - Quantos dias cada cliente visitou o restaurante?
@@ -115,9 +118,12 @@ ORDER BY customer_id
 ``` 
 
 **RESPOSTA:**
-customer_ id	days_visited
-A		6		
-B		6
+|  customer_id | days_visited  |
+| ------------ | ------------ |
+| A  | 6  |
+| B  |  6 |
+| C  |  3 |
+
 
 #### 3 - Qual foi o primeiro item do cardápio adquirido por cada cliente?
 
@@ -131,11 +137,14 @@ WHERE order_date = '2021-01-01'
 ``` 
 
 **RESPOSTA:**
-customer_ id	order_date	product_name
-A		2021-01-01	sushi		
-A		2021-01-01	curry
-B		2021-01-01	curry
-C		2021-01-01	ramen
+| customer_id  | order_date  | product_name  |
+| ------------ | ------------ | ------------ |
+|  A | 2021-01-01  | sushi  |
+|  A | 2021-01-01  |  curry |
+|  B |  2021-01-01 | curry  |
+|  C | 2021-01-01  | ramen  |
+| C  |  2021-01-01 |  ramen |
+
 
 #### 4 - Qual é o item mais comprado do cardápio e quantas vezes foi comprado por todos os clientes?
 
@@ -151,10 +160,12 @@ ORDER BY favorite DESC
 ``` 
 
 **RESPOSTA:**
-product_name	favorite
-ramen		8
-curry		4
-sushi		3 		
+|  product_name | favorite  |
+| ------------ | ------------ |
+|  ramen | 8  |
+| curry  |  4 |
+|  sushi |  3 |
+
 
 #### 5 - Qual item foi o mais popular para cada cliente?
 
@@ -171,11 +182,16 @@ ORDER BY favorite DESC
 ``` 
 
 **RESPOSTA:**
-customer_ id	product_name	favorite
-A		ramen		3		
-C		ramen		3	
-A		curry		2
-B		curry		2
+|  customer_id |  product_name |  favorite |
+| ------------ | ------------ | ------------ |
+|  A | ramen  |  3 |
+|  C | ramen  |  3 |
+|  A | curry  |  2 |
+|  B | curry  |  2 |
+| B  |  sushi | 2  |
+|  B | ramen  | 2  |
+|  A | sushi  |  1 |
+
 
 #### 6 - Qual item foi comprado primeiro pelo cliente depois que ele se tornou membro?
 
@@ -192,6 +208,18 @@ FROM dannys_diner.sales sales
 WHERE order_date >= join_date
 ORDER BY order_date
  ``` 
+ 
+ **RESPOSTA**
+ | customer_id  | product_name   |  order_date |
+| ------------ | ------------ | ------------ |
+|  A | curry  | 2021-01-07  |
+|  A | ramen  |  2021-01-10 |
+|  A |  ramen | 2021-01-11  |
+|  A |  ramen |  2021-01-11 |
+|  B |  sushi |  2021-01-11 |
+|  B | ramen  | 2021-01-16  |
+| B  |  ramen | 2021-02-01  |
+
 
 ####7 - Qual item foi comprado pouco antes de o cliente se tornar um membro?
 
@@ -208,6 +236,16 @@ FROM dannys_diner.sales sales
 WHERE order_date < join_date
 ORDER BY order_date DESC
 ``` 
+
+**RESPOSTA**
+| customer_id  | product_name  |  order_date |
+| ------------ | ------------ | ------------ |
+|  B | curry  |  2021-01-04 |
+|  A |  sushi | 2021-01-02  |
+|  A | curry  | 2021-01-01  |
+|  B |  curry | 2021-01-01  |
+| B  | curry  |  2021-01-01 |
+
 
 #### 8 - Qual é o total de itens e o valor gasto para cada membro antes de se tornar um membro?
 
@@ -275,6 +313,15 @@ WHERE order_date >= join_date AND order_date < '2021-02-01'
 GROUP BY customer_id
 ORDER BY customer_id
 ``` 
+
+**RESPOSTA**
+| customer_id  | points |
+| -------------------| ------------ |
+|  A | 1020  |
+|  B | 440  |
+
+
+
 # Resolução das Questões Bônus
 
 #### 11 - Juntando tudo 

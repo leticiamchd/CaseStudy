@@ -263,6 +263,13 @@ WHERE order_date < join_date
 GROUP BY sales.customer_id
 ``` 
 
+**RESPOSTA**
+| customer_id  |  total_items |  total_amount |
+| ------------ | ------------ | ------------ |
+|  A | 2  |  25 |
+|  B |  3 | 40  |
+
+
 #### 9 - Se cada $ 1 gasto equivale a 10 pontos e o sushi tem um multiplicador de 2x pontos - quantos pontos cada cliente teria?
 
 ```sql
@@ -272,14 +279,20 @@ SELECT
     	WHEN product_name = 'sushi' THEN price * 20
       	ELSE price * 10
   		END) AS points
-
 FROM dannys_diner.sales sales
 INNER JOIN dannys_diner.menu menu
   ON sales.product_id = menu.product_id
-  
 GROUP BY customer_id
 ORDER BY customer_id
 ``` 
+
+**RESPOSTA**
+|  customer_id | points  |
+| ------------ | ------------ |
+|  A |  860 |
+| B  |  940 |
+|  C | 360  |
+
 
 #### 10 - Na primeira semana após o cliente aderir ao programa (incluindo a data de adesão), ele ganha 2x pontos em todos os itens, não apenas no sushi - quantos pontos os clientes A e B têm no final de janeiro?
 

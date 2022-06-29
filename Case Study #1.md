@@ -1,6 +1,6 @@
 # Resolução do Problema
 
-Neste Notebook terá a resolução do Estudo de Caso número 1, também chamado de Restaurante do Danny. O deasfio original se encontra todo em inglês, porém além de colocar as resoluções, deixarei todas as informações traduzidas.
+Neste Notebook terá a resolução do Estudo de Caso número 1, também chamado de Restaurante do Danny. O desafio original se encontra todo em inglês, porém além de colocar as resoluções, deixarei todas as informações traduzidas. Lembrando que as variáveis se encontram na forma original (em inglês). 
 
 **Link Original** -> https://8weeksqlchallenge.com/case-study-1/
 

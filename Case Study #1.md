@@ -28,7 +28,8 @@ Danny compartilhou com você 3 conjuntos de dados importantes para este estudo d
 
 Você pode inspecionar o diagrama da relação entre os conjuntos de dados do exemplo abaixo:
 
-**IMAGEM**
+<img width="605" alt="Captura de Tela 2022-06-29 às 13 53 47" src="https://user-images.githubusercontent.com/66830501/176503776-3af5eb65-70ae-4cb6-838e-eb6d3d275f6b.png">
+
 
 ## Exemplo dos Conjuntos de Dados
 
@@ -38,19 +39,19 @@ Todos os conjuntos de dados existem no banco de dados chamado `dannys_diner` - c
 
 A tabela de `sales` captura todas as compras de acordo com o `customer_id`, com as informações de `order_date` e `product_id` correspondentes para quando e quais itens do menu foram pedidos.
 
-**IMAGEM**
+<img width="391" alt="Captura de Tela 2022-06-29 às 14 03 20" src="https://user-images.githubusercontent.com/66830501/176503836-02a5fb9f-6ab9-49e6-bd8d-34c143a41383.png">
 
 #### Tabela 2: menu
 
 A tabela de `menu` mapeia o `product_id` para o `product_name` e o `price` de cada item do menu.
 
-**IMAGEM**
+<img width="375" alt="Captura de Tela 2022-06-29 às 14 04 43" src="https://user-images.githubusercontent.com/66830501/176503871-75c9b873-0fda-4007-85be-3dcb3f06b9c9.png">
 
 #### Tabela 3: members
 
 A tabela `members` captura a `join_date` quando um `customer_id` ingressou na versão beta do programa de fidelidade do Restaurante do Danny.
 
-**IMAGEM**
+<img width="273" alt="Captura de Tela 2022-06-29 às 14 04 51" src="https://user-images.githubusercontent.com/66830501/176503888-8505cd18-6ffb-42d0-ac20-beea5472f62c.png">
 
 ## Questões 
 
@@ -75,11 +76,13 @@ As perguntas a seguir estão relacionadas à criação de tabelas de dados bási
 
 Recrie a seguinte saída da tabela usando os dados disponíveis:
 
-**IMAGEM**
+<img width="599" alt="Captura de Tela 2022-06-29 às 14 08 22" src="https://user-images.githubusercontent.com/66830501/176503938-46dcf4b6-dd1c-4acd-ab1d-3104d7a1523d.png">
 
 #### Classificação de tudo
 
 Danny também quer mais informações sobre a classificação dos produtos dos clientes, mas ele não precisa da classificação das compras de não membros, portanto, espera valores de classificação nulos para os registros quando os clientes ainda não fazem parte do programa de fidelidade.
+
+<img width="695" alt="Captura de Tela 2022-06-29 às 14 16 59" src="https://user-images.githubusercontent.com/66830501/176503968-ead97642-d432-4a43-a889-09be2bf31018.png">
 
 # Respostas
 

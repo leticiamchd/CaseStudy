@@ -339,7 +339,41 @@ ORDER BY order_day
 
 #### 10. 
 
+```sql 
+WITH week AS
+(
+SELECT *,
+EXTRACT(DAYOFWEEK FROM order_time) AS day_of_week
+FROM `resonant-cairn-350019.case_study2.customer_orders`
+)
 
+SELECT  
+CASE 
+  WHEN day_of_week = 1 THEN 'Sunday'
+  WHEN day_of_week = 2 THEN 'Monday'
+  WHEN day_of_week = 3 THEN 'Tuesday'
+  WHEN day_of_week = 4 THEN 'Wednesday'
+  WHEN day_of_week = 5 THEN 'Thursday'
+  WHEN day_of_week = 6 THEN 'Friday'
+  WHEN day_of_week = 7 THEN 'Saturday'
+  ELSE 'Null'
+END AS day,
+COUNT(order_id) as amount_order
+
+FROM week
+
+GROUP BY  day_of_week
+ORDER BY day_of_week
+```
+
+**RESPOSTA**
+
+| day  | amount_order  |
+| ------------ | ------------ |
+| Sunday  | 1  |
+| Monday  | 5  |
+| Friday  | 5  |
+|  Saturday |  3 |
 
 
 

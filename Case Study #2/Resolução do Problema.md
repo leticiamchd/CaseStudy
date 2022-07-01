@@ -415,4 +415,45 @@ FROM dif_dates
 #### 2. 
 
 ```sql 
+with clean_runner_orders as
+( 
+      SELECT order_id, runner_id, 
+             (case when pickup_time is null or pickup_time like '%null%' OR pickup_time = "NaN" then '0'
+                  else pickup_time 
+             end) as pickup_time,
+             (case when distance is null or distance like '%null%' OR distance = "NaN" then '0' 
+                  else distance 
+             end) as distance, 
+             (case when duration is null or duration like '%null%' OR duration = "NaN" then '0' 
+                  else duration 
+             end) as duration,
+             (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
+                  else cancellation 
+             end) as cancellation
+      from `resonant-cairn-350019.case_study2.runner_orders`
+ ) 
+
+SELECT runner_id,
+AVG(TIMESTAMP_DIFF(TIMESTAMP(pickup_time), order_time, MINUTE)) AS avg_minutes
+
+FROM `resonant-cairn-350019.case_study2.customer_orders` AS customers
+INNER JOIN clean_runner_orders AS runner
+ON customers.order_id = runner.order_id
+
+WHERE cancellation = '0'
+GROUP BY runner_id 
+```
+
+**RESPOSTA**
+
+| runner_id  | avg_minutes  |
+| ------------ | ------------ |
+| 1  |  15.333 |
+| 2  | 23.4  |
+| 3  | 10  |
+
+
+#### 3. 
+
+```sql 
 

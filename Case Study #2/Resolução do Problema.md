@@ -545,4 +545,39 @@ GROUP BY customer_id
 #### 5. 
 
 ```sql
+with clean_runner_orders as
+( 
+      SELECT order_id, runner_id, 
+             (case when pickup_time is null or pickup_time like '%null%' OR pickup_time = "NaN" then '0'
+                  else pickup_time 
+             end) as pickup_time,
+             (case when distance is null or distance like '%null%' OR distance = "NaN" then '0' 
+                  else distance 
+             end) as distance, 
+             (case when duration is null or duration like '%null%' OR duration = "NaN" then '0' 
+                  else duration 
+             end) as duration,
+             (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
+                  else cancellation 
+             end) as cancellation
+      from `resonant-cairn-350019.case_study2.runner_orders`
+ ) 
+
+SELECT 
+MAX(CAST(LEFT (duration, 2) AS INT64)) - MIN(CAST(LEFT (duration, 2) AS INT64)) AS dif_delivery_time
+
+FROM clean_runner_orders
+
+WHERE cancellation = '0'
+```
+
+**RESPOSTA**
+
+| dif_delivery_time  |
+| ------------ |
+|  30 |
+
+#### 6. 
+
+```sql 
 

@@ -376,4 +376,43 @@ ORDER BY day_of_week
 |  Saturday |  3 |
 
 
+# B. Runner and Customers Experience 
+
+#### 1. 
+
+
+```sql
+WITH dif_dates AS
+(
+  SELECT runner_id, registration_date, 
+  DATE_DIFF(registration_date, DATE '2021-01-01', DAY) AS dif_days
+
+  FROM `resonant-cairn-350019.case_study2.runners`
+)
+
+SELECT 
+SUM(CASE
+  WHEN dif_days < 7 THEN 1
+  ELSE 0
+  END) AS first_week,
+SUM(CASE
+      WHEN dif_days >= 7 AND dif_days < 14 THEN 1 
+      ELSE 0 
+      END) AS second_week,
+SUM(CASE
+      WHEN dif_days >= 14 AND dif_days < 21 THEN 1 
+      ELSE 0 
+      END) AS third_week
+FROM dif_dates
+```
+
+**RESPOSTA**
+
+| first_week  |  second_week | third_week  |
+| ------------ | ------------ | ------------ |
+| 2  | 1  | 1  |
+
+#### 2. 
+
+```sql 
 

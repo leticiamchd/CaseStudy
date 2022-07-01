@@ -456,4 +456,93 @@ GROUP BY runner_id
 #### 3. 
 
 ```sql 
+with clean_runner_orders as
+( 
+      SELECT order_id, runner_id, 
+             (case when pickup_time is null or pickup_time like '%null%' OR pickup_time = "NaN" then '0'
+                  else pickup_time 
+             end) as pickup_time,
+             (case when distance is null or distance like '%null%' OR distance = "NaN" then '0' 
+                  else distance 
+             end) as distance, 
+             (case when duration is null or duration like '%null%' OR duration = "NaN" then '0' 
+                  else duration 
+             end) as duration,
+             (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
+                  else cancellation 
+             end) as cancellation
+      from `resonant-cairn-350019.case_study2.runner_orders`
+ ) 
+
+SELECT customers.order_id, 
+COUNT(customers.order_id) AS  amount_pizza,
+AVG(TIMESTAMP_DIFF(TIMESTAMP(pickup_time), order_time, MINUTE)) AS avg_minutes
+
+FROM `resonant-cairn-350019.case_study2.customer_orders` AS customers
+INNER JOIN clean_runner_orders AS runner
+ON customers.order_id = runner.order_id
+
+WHERE cancellation = '0'
+GROUP BY customers.order_id
+ORDER BY avg_minutes DESC 
+``` 
+
+**RESPOSTA**
+
+| order_id  | amount_pizza  | avg_minutes  |
+| ------------ | ------------ | ------------ |
+| 4  |  3 | 29  |
+| 3  |  2 | 21  |
+| 8  |  1 |  20 |
+| 10  |  2 | 15  |
+| 1  | 1  | 10  |
+|  2 | 1  |  10 |
+|  5 | 1  | 10  |
+|  7 | 1  | 10  |
+
+#### 4. 
+
+```sql 
+with clean_runner_orders as
+( 
+      SELECT order_id, runner_id, 
+             (case when pickup_time is null or pickup_time like '%null%' OR pickup_time = "NaN" then '0'
+                  else pickup_time 
+             end) as pickup_time,
+             (case when distance is null or distance like '%null%' OR distance = "NaN" then '0' 
+                  else distance 
+             end) as distance, 
+             (case when duration is null or duration like '%null%' OR duration = "NaN" then '0' 
+                  else duration 
+             end) as duration,
+             (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
+                  else cancellation 
+             end) as cancellation
+      from `resonant-cairn-350019.case_study2.runner_orders`
+ ) 
+
+SELECT customer_id,
+AVG(CAST(TRIM (distance, 'km') AS FLOAT64)) AS avg_distance
+
+FROM `resonant-cairn-350019.case_study2.customer_orders` AS customers
+INNER JOIN clean_runner_orders AS runner
+ON customers.order_id = runner.order_id
+
+WHERE cancellation = '0'
+GROUP BY customer_id
+``` 
+
+**RESPOSTA**
+
+| customer_id  | avg_distance  |
+| ------------ | ------------ |
+| 101  | 20  |
+| 102  | 16.7333  |
+| 103  | 23.4  |
+| 104  | 10  |
+| 105  | 25  |
+
+#### 5. 
+
+```sql
 

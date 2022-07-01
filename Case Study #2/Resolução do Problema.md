@@ -580,4 +580,87 @@ WHERE cancellation = '0'
 #### 6. 
 
 ```sql 
+with clean_runner_orders as
+( 
+      SELECT order_id, runner_id, 
+             (case when pickup_time is null or pickup_time like '%null%' OR pickup_time = "NaN" then '0'
+                  else pickup_time 
+             end) as pickup_time,
+             (case when distance is null or distance like '%null%' OR distance = "NaN" then '0' 
+                  else distance 
+             end) as distance, 
+             (case when duration is null or duration like '%null%' OR duration = "NaN" then '0' 
+                  else duration 
+             end) as duration,
+             (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
+                  else cancellation 
+             end) as cancellation
+      from `resonant-cairn-350019.case_study2.runner_orders`
+ ) 
+
+SELECT order_id, runner_id, 
+
+CAST(TRIM (distance, 'km') AS FLOAT64) / (CAST(LEFT (duration, 2) AS INT64) /60) AS speed
+
+
+FROM clean_runner_orders
+
+WHERE cancellation = '0'
+ORDER BY runner_id
+``` 
+
+**RESPOSTA**
+
+| order_id  | runner_id  | speed  |
+| ------------ | ------------ | ------------ |
+| 1  | 1  | 37.5  |
+| 2  | 1  | 44.4444  |
+|  3 | 1  | 40.2  |
+|  10 | 1  | 60  |
+| 4  | 2  |  35.2 |
+|  7 | 2  | 60  |
+| 8  | 2  | 93.6  |
+| 5  | 3  | 40  |
+
+The delivery speed of the order 8 is inconsistent with the others.
+
+#### 7. 
+
+```sql
+with clean_runner_orders as
+( 
+      SELECT order_id, runner_id, 
+             (case when pickup_time is null or pickup_time like '%null%' OR pickup_time = "NaN" then '0'
+                  else pickup_time 
+             end) as pickup_time,
+             (case when distance is null or distance like '%null%' OR distance = "NaN" then '0' 
+                  else distance 
+             end) as distance, 
+             (case when duration is null or duration like '%null%' OR duration = "NaN" then '0' 
+                  else duration 
+             end) as duration,
+             (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
+                  else cancellation 
+             end) as cancellation
+      from `resonant-cairn-350019.case_study2.runner_orders`
+ ) 
+
+SELECT runner_id,
+((COUNT(order_id) - SUM(CASE WHEN cancellation = '0' THEN 0 ELSE 1 END)) / COUNT(order_id) * 100) AS delivery_percentage
+
+FROM clean_runner_orders
+GROUP BY runner_id
+``` 
+
+**RESPOSTA**
+
+| runner_id  | delivery_percentage  |
+| ------------ | ------------ |
+| 1  |  100 |
+| 2  | 75  |
+| 3  |  50 |
+
+# C. Ingredient Optimisation 
+
+
 

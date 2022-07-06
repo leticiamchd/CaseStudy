@@ -306,10 +306,10 @@ WITH all_data AS
   SELECT sales.customer_id, order_date, sales.product_id,join_date,
   product_name, price
   FROM
-   `resonant-cairn-350019.case_study.sales` as sales 
-   INNER JOIN `resonant-cairn-350019.case_study.menu` as menu
+   ...case_study.sales` as sales 
+   INNER JOIN ...case_study.menu` as menu
    ON sales.product_id = menu.product_id
-   INNER JOIN `resonant-cairn-350019.case_study.members` as members
+   INNER JOIN ...case_study.members` as members
    ON sales.customer_id = members.customer_id
 )
 
@@ -345,10 +345,10 @@ WITH all_data AS
   SELECT sales.customer_id, order_date, sales.product_id,join_date,
   product_name, price,
   FROM
-   `resonant-cairn-350019.case_study.sales` as sales 
-   INNER JOIN `resonant-cairn-350019.case_study.menu` as menu
+  ...case_study.sales` as sales 
+   INNER JOIN ...case_study.menu` as menu
    ON sales.product_id = menu.product_id
-   INNER JOIN `resonant-cairn-350019.case_study.members` as members
+   INNER JOIN ...case_study.members` as members
    ON sales.customer_id = members.customer_id
 )
 

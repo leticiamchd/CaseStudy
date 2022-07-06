@@ -13,7 +13,7 @@ with clean_customer_orders as
                   else extras 
              end) as extras, 
              order_time 
-      from `resonant-cairn-350019.case_study2.customer_orders`
+      from ...case_study2.customer_orders`
  ) 
  select * 
  from clean_customer_orders
@@ -37,7 +37,7 @@ with clean_runner_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  ) 
  select * 
  from clean_runner_orders
@@ -56,14 +56,14 @@ with clean_runner_orders as
 ```sql
 SELECT COUNT(pizza_id) AS pizzas_ordered
 
-FROM `resonant-cairn-350019.case_study2.customer_orders`
+FROM ...case_study2.customer_orders`
 ```
 
 #### 2. 
 
 ```sql
 SELECT customer_id
-FROM `resonant-cairn-350019.case_study2.customer_orders`
+FROM ...case_study2.customer_orders`
 
 GROUP BY customer_id
 ````
@@ -95,7 +95,7 @@ with clean_runner_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  ) 
  select 
   COUNT(order_id) AS successful_orders
@@ -126,13 +126,13 @@ with clean_runner_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  ) 
 
 
  SELECT pizza_id, 
   COUNT(pizza_id) AS amount_pizza_delivered
-FROM `resonant-cairn-350019.case_study2.customer_orders` AS customer
+FROM ...case_study2.customer_orders` AS customer
 INNER JOIN clean_runner_orders AS runner
 ON customer.order_id = runner.order_id
 WHERE cancellation = '0'
@@ -152,8 +152,8 @@ GROUP BY pizza_id
 SELECT customer_id, pizza_name,
 COUNT(pizza_name) AS amount_pizza
 
-FROM `resonant-cairn-350019.case_study2.customer_orders` AS customer
-INNER JOIN `resonant-cairn-350019.case_study2.pizza_names` pizza
+FROM ...case_study2.customer_orders` AS customer
+INNER JOIN ....case_study2.pizza_names` pizza
 ON customer.pizza_id = pizza.pizza_id
 
 GROUP BY customer_id, pizza_name
@@ -179,7 +179,7 @@ ORDER BY customer_id
 SELECT customer_id,order_id,
 COUNT(order_id) AS amount_order
 
-FROM `resonant-cairn-350019.case_study2.customer_orders` 
+FROM ...case_study2.customer_orders` 
 
 GROUP BY customer_id, order_id
 ORDER BY amount_order DESC
@@ -212,7 +212,7 @@ with clean_customer_orders as
                   else extras 
              end) as extras, 
              order_time 
-      from `resonant-cairn-350019.case_study2.customer_orders`
+      from ...case_study2.customer_orders`
  ) ,
  clean_runner_orders as
 ( 
@@ -229,7 +229,7 @@ with clean_customer_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  )
 
 SELECT clean_runner_orders.order_id, customer_id,exclusions, extras,
@@ -273,7 +273,7 @@ with clean_customer_orders as
                   else extras 
              end) as extras, 
              order_time 
-      from `resonant-cairn-350019.case_study2.customer_orders`
+      from ...case_study2.customer_orders`
  ) ,
  clean_runner_orders as
 ( 
@@ -290,7 +290,7 @@ with clean_customer_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  )
 
 SELECT clean_runner_orders.order_id, customer_id,exclusions, extras,
@@ -318,7 +318,7 @@ EXTRACT(DAY FROM order_time) AS order_day,
 EXTRACT(HOUR FROM order_time) AS order_hour,
 COUNT(order_id) as amount_order
 
-FROM `resonant-cairn-350019.case_study2.customer_orders`
+FROM ...case_study2.customer_orders`
 
 GROUP BY  order_day, order_hour
 ORDER BY order_day
@@ -344,7 +344,7 @@ WITH week AS
 (
 SELECT *,
 EXTRACT(DAYOFWEEK FROM order_time) AS day_of_week
-FROM `resonant-cairn-350019.case_study2.customer_orders`
+FROM ...case_study2.customer_orders`
 )
 
 SELECT  
@@ -387,7 +387,7 @@ WITH dif_dates AS
   SELECT runner_id, registration_date, 
   DATE_DIFF(registration_date, DATE '2021-01-01', DAY) AS dif_days
 
-  FROM `resonant-cairn-350019.case_study2.runners`
+  FROM ...case_study2.runners`
 )
 
 SELECT 
@@ -430,13 +430,13 @@ with clean_runner_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  ) 
 
 SELECT runner_id,
 AVG(TIMESTAMP_DIFF(TIMESTAMP(pickup_time), order_time, MINUTE)) AS avg_minutes
 
-FROM `resonant-cairn-350019.case_study2.customer_orders` AS customers
+FROM ...case_study2.customer_orders` AS customers
 INNER JOIN clean_runner_orders AS runner
 ON customers.order_id = runner.order_id
 
@@ -471,14 +471,14 @@ with clean_runner_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  ) 
 
 SELECT customers.order_id, 
 COUNT(customers.order_id) AS  amount_pizza,
 AVG(TIMESTAMP_DIFF(TIMESTAMP(pickup_time), order_time, MINUTE)) AS avg_minutes
 
-FROM `resonant-cairn-350019.case_study2.customer_orders` AS customers
+FROM ...case_study2.customer_orders` AS customers
 INNER JOIN clean_runner_orders AS runner
 ON customers.order_id = runner.order_id
 
@@ -518,13 +518,13 @@ with clean_runner_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  ) 
 
 SELECT customer_id,
 AVG(CAST(TRIM (distance, 'km') AS FLOAT64)) AS avg_distance
 
-FROM `resonant-cairn-350019.case_study2.customer_orders` AS customers
+FROM ...case_study2.customer_orders` AS customers
 INNER JOIN clean_runner_orders AS runner
 ON customers.order_id = runner.order_id
 
@@ -560,7 +560,7 @@ with clean_runner_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  ) 
 
 SELECT 
@@ -595,7 +595,7 @@ with clean_runner_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  ) 
 
 SELECT order_id, runner_id, 
@@ -642,7 +642,7 @@ with clean_runner_orders as
              (case when cancellation is null or cancellation like '%null%' OR cancellation = "NaN" then '0' 
                   else cancellation 
              end) as cancellation
-      from `resonant-cairn-350019.case_study2.runner_orders`
+      from ...case_study2.runner_orders`
  ) 
 
 SELECT runner_id,
